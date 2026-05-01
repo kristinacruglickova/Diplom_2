@@ -3,11 +3,10 @@ package stellarburgers.api.client;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import stellarburgers.api.Endpoints;
+import stellarburgers.api.model.CreateOrderRequest;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class OrderClient extends BaseClient {
 
@@ -19,11 +18,9 @@ public class OrderClient extends BaseClient {
 
     @Step("Создать заказ")
     public Response createOrder(List<String> ingredientIds, String accessToken) {
-        Map<String, Object> payload = new LinkedHashMap<>();
-        payload.put("ingredients", ingredientIds == null ? Collections.emptyList() : ingredientIds);
-
+        List<String> ingredients = ingredientIds == null ? Collections.emptyList() : ingredientIds;
         io.restassured.specification.RequestSpecification specification = requestSpec()
-                .body(payload);
+                .body(new CreateOrderRequest(ingredients));
 
         if (accessToken != null) {
             specification.header("Authorization", accessToken);
