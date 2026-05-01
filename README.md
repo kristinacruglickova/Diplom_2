@@ -4,12 +4,14 @@
 
 ## Стек технологий
 
-- Java 11
-- Maven 3.9.x
-- JUnit 4.13.2
-- Rest Assured 5.5.1
-- Allure 2.29.1
-- Lombok 1.18.30
+| Компонент | Версия |
+| --- | --- |
+| Java | 11 |
+| Maven | 3.9.x |
+| JUnit | 4.13.2 |
+| Rest Assured | 5.5.1 |
+| Allure | 2.29.1 |
+| Lombok | 1.18.30 |
 
 ## Структура проекта
 
