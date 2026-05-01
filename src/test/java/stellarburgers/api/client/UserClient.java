@@ -1,7 +1,5 @@
 package stellarburgers.api.client;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import stellarburgers.api.Endpoints;
@@ -12,19 +10,10 @@ import java.util.Map;
 
 public class UserClient extends BaseClient {
 
-    private static final Gson GSON = new GsonBuilder()
-            .serializeNulls()
-            .create();
-
     @Step("Создать пользователя")
     public Response createUser(TestUser user) {
-        Map<String, Object> payload = new LinkedHashMap<>();
-        payload.put("email", user.getEmail());
-        payload.put("password", user.getPassword());
-        payload.put("name", user.getName());
-
         return requestSpec()
-                .body(GSON.toJson(payload))
+                .body(user)
                 .post(Endpoints.REGISTER);
     }
 
@@ -37,7 +26,7 @@ public class UserClient extends BaseClient {
         payload.remove(fieldName);
 
         return requestSpec()
-                .body(GSON.toJson(payload))
+                .body(payload)
                 .post(Endpoints.REGISTER);
     }
 
@@ -53,7 +42,7 @@ public class UserClient extends BaseClient {
         payload.put("password", password);
 
         return requestSpec()
-                .body(GSON.toJson(payload))
+                .body(payload)
                 .post(Endpoints.LOGIN);
     }
 

@@ -3,6 +3,7 @@ package stellarburgers.api;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import stellarburgers.api.util.ApiMessages;
 import stellarburgers.api.util.UserGenerator;
@@ -22,7 +23,7 @@ public class UserRegistrationTest extends BaseApiTest {
         accessToken = response.path("accessToken");
 
         response.then()
-                .statusCode(200)
+                .statusCode(HttpStatus.SC_OK)
                 .body("success", equalTo(true))
                 .body("user.email", equalTo(createdUser.getEmail()))
                 .body("user.name", equalTo(createdUser.getName()))
@@ -40,7 +41,7 @@ public class UserRegistrationTest extends BaseApiTest {
 
         userClient.createUser(createdUser)
                 .then()
-                .statusCode(403)
+                .statusCode(HttpStatus.SC_FORBIDDEN)
                 .body("success", equalTo(false))
                 .body("message", equalTo(ApiMessages.USER_ALREADY_EXISTS));
     }

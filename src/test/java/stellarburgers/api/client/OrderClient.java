@@ -1,6 +1,5 @@
 package stellarburgers.api.client;
 
-import com.google.gson.Gson;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import stellarburgers.api.Endpoints;
@@ -11,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderClient extends BaseClient {
-
-    private static final Gson GSON = new Gson();
 
     @Step("Получить ингредиенты")
     public Response getIngredients() {
@@ -26,7 +23,7 @@ public class OrderClient extends BaseClient {
         payload.put("ingredients", ingredientIds == null ? Collections.emptyList() : ingredientIds);
 
         io.restassured.specification.RequestSpecification specification = requestSpec()
-                .body(GSON.toJson(payload));
+                .body(payload);
 
         if (accessToken != null) {
             specification.header("Authorization", accessToken);

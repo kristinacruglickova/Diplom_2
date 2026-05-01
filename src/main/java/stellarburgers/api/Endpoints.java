@@ -9,6 +9,4 @@ public final class Endpoints {
     public static final String INGREDIENTS = "/api/ingredients";
     public static final String ORDERS = "/api/orders";
 
-    private Endpoints() {
-    }
 }

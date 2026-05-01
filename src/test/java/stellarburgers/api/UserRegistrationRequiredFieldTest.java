@@ -2,6 +2,7 @@ package stellarburgers.api;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -36,7 +37,7 @@ public class UserRegistrationRequiredFieldTest extends BaseApiTest {
 
         userClient.createUserWithoutField(createdUser, missedField)
                 .then()
-                .statusCode(403)
+                .statusCode(HttpStatus.SC_FORBIDDEN)
                 .body("success", equalTo(false))
                 .body("message", equalTo(ApiMessages.REQUIRED_FIELDS_MESSAGE));
     }

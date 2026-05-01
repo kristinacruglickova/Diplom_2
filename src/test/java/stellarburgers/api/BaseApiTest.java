@@ -1,6 +1,7 @@
 package stellarburgers.api;
 
 import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.After;
 import stellarburgers.api.client.UserClient;
 import stellarburgers.api.model.TestUser;
@@ -15,7 +16,7 @@ public abstract class BaseApiTest {
     public void tearDown() {
         if (accessToken == null && createdUser != null) {
             Response loginResponse = userClient.login(createdUser);
-            if (loginResponse.statusCode() == 200) {
+            if (loginResponse.statusCode() == HttpStatus.SC_OK) {
                 accessToken = loginResponse.path("accessToken");
             }
         }
